@@ -40,7 +40,7 @@ public class Lambda_02_Test {
         
         //////
         //here   
-        List<Account> result = map(personList,(Person p)->{return new Account(p,100);});
+        List<Account> result = map(personList,(Person p)-> new Account(p,100));
 
         assert result.size() == personList.size();
         for (Account account : result) {
