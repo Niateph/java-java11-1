@@ -21,7 +21,7 @@ public class DateAndTime_07_Test {
 
 		// TODO Créer une date Java 1 (12/02/2017)
 		Date date = new Date();
-		date.setYear(2017);
+		date.setYear(2017-1900);
 		date.setMonth(1);
 		date.setDate(12);
 
