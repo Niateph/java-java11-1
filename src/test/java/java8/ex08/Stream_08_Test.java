@@ -81,18 +81,24 @@ public class Stream_08_Test {
         // Le bloc try(...) permet de fermer (close()) le stream après utilisation
         try (Stream<String> lines = java.nio.file.Files.lines(Path.of(NAISSANCES_DEPUIS_1900_CSV))) {
             // TODO construire une MAP (clé = année de naissance, valeur = somme des nombres de naissance de l'année)
-            List<Naissance> naissance = new ArrayList<Naissance>();
-            lines.forEach(l->{        	
+            lines.skip(1).map(l->{
+        	String []
+        	return new Naissance(l.));
+            }
+            
+            List<Naissance> naissances = new ArrayList<Naissance>();
+            lines.forEach(l->{System.out.println(l);   	
         	String[] line = l.split(";");
-        	naissance.add(new Naissance(line[1],line[2],Integer.parseInt(line[3])));
+
+        	naissances.add(new Naissance(line[2],line[3],Integer.parseInt(line[4])));
             });
-            Map<String, List<Naissance>> naissancesGroupees = naissance.stream().collect(Collectors.groupingBy(n->n.getAnnee()));
-            naissancesGroupees.keySet().forEach(g->g.valu);
+
             
             
+            naissances.stream().collect(Collectors.groupingBy(n->n.getAnnee(),Collectors.summingInt(n->n.getNombre())))
+        	    .forEach((k,v)->System.out.println("annee : "+k+" total : "+v));
+
             Map<String, Integer> result = null;
-
-
             assertThat(result.get("2015"), is(8097));
             assertThat(result.get("1900"), is(5130));
         }
