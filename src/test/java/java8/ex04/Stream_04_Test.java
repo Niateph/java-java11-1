@@ -19,8 +19,7 @@ public class Stream_04_Test {
     public void test_of() throws Exception {
         // Construire un stream permettant de rendre le test passant
 	
-	List<String> listPrenoms = Arrays.asList("Alexandra", "Cyril", "Johnny", "Marion", "Sophie");
-        Stream<String> result = listPrenoms.stream();
+        Stream<String> result = Stream.of("Alexandra", "Cyril", "Johnny", "Marion", "Sophie");
 
         assertThat(result.toArray(), arrayContaining("Alexandra", "Cyril", "Johnny", "Marion", "Sophie"));
     }
@@ -55,8 +54,8 @@ public class Stream_04_Test {
     @Test
     public void test_iterate() throws Exception {
         // TODO utiliser la méthode "iterate" de Stream afin de rendre le test passant
-        Stream<Integer> result1 = Stream.iterate(1, n->n).limit(5);
-        Stream<Integer> result2 = Stream.iterate(1, n->n+1).limit(5);
+        Stream<Integer> result1 = Stream.iterate(1, i->i).limit(5);
+        Stream<Integer> result2 = Stream.iterate(1, i->i<=5, i->i+1).limit(5);
         assertThat(result1.toArray(), arrayContaining(1,1,1,1,1));
         assertThat(result2.toArray(), arrayContaining(1,2,3,4,5));
     }
