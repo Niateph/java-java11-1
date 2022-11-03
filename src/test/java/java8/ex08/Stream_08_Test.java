@@ -3,11 +3,18 @@ package java8.ex08;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.file.FileSystem;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
+import java.nio.file.WatchEvent.Kind;
+import java.nio.file.WatchEvent.Modifier;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.*;
@@ -21,7 +28,7 @@ import static org.junit.Assert.*;
 public class Stream_08_Test {
 
     // Chemin vers un fichier de données des naissances
-    private static final String NAISSANCES_DEPUIS_1900_CSV = "./naissances_depuis_1900.csv";
+    private static final String NAISSANCES_DEPUIS_1900_CSV = "././naissances_depuis_1900.csv";
 
     private static final String DATA_DIR = "./pizza-data";
 
@@ -69,10 +76,11 @@ public class Stream_08_Test {
 
         // TODO utiliser la méthode java.nio.file.Files.lines pour créer un stream de lignes du fichier naissances_depuis_1900.csv
         // Le bloc try(...) permet de fermer (close()) le stream après utilisation
-        try (Stream<String> lines = null) {
-
+        try (Stream<String> lines = java.nio.file.Files.lines(Path.of(NAISSANCES_DEPUIS_1900_CSV))) {
+            
             // TODO construire une MAP (clé = année de naissance, valeur = somme des nombres de naissance de l'année)
-            Map<String, Integer> result = null;
+            Map<String, Integer> result = null ;
+        	    //lines.collect(Collectors.groupingBy(l->{System.out.println(l.toString().split(";"));}));
 
 
             assertThat(result.get("2015"), is(8097));
